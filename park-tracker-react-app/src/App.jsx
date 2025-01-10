@@ -19,6 +19,7 @@ function App() {
 
     // holds national park name for API search and display
     const [chosenPark, setChosenPark] = useState()
+	// console.log(chosenPark)
 
     // function to change above (in parklist or usershow)
     const selectPark = (event) => {
