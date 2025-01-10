@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import ParkList from "./components/ParkList";
-import ParkShow from "./components/UserShow";
+import ParkSection from "./components/ParkSection";
 import UserList from "./components/UserList";
 import UserShow from "./components/UserShow";
 import NewUser from "./components/NewUser";
@@ -23,8 +22,7 @@ function App() {
 			{page === "home" ? <Home /> : ""}
 			{page === "userlist" ? <UserList /> : ""}
 			{page === "usershow" ? <UserShow /> : ""}
-			{page === "parklist" ? <ParkList /> : ""}
-			{page === "parkshow" ? <ParkShow /> : ""}
+			{page === "parksection" ? <ParkSection /> : ""}
 			{page === "newuser" ? <NewUser /> : ""}
 			{page === "login" ? <Login /> : ""}
 		</>
