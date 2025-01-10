@@ -1,4 +1,5 @@
 function UserList() {
+    // url path to list page is baseurl/api/user
 	return (
 		<>
 			<h1>This is the User List!</h1>

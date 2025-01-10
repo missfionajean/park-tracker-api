@@ -7,6 +7,9 @@ function Navbar({ changePage }) {
 			<button onClick={changePage} value="userlist">
 				Users
 			</button>
+            <button onClick={changePage} value="usershow">
+				User Show Test
+			</button>
 			<button onClick={changePage} value="parklist">
 				Parks
 			</button>
