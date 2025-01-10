@@ -17,14 +17,6 @@ function App() {
 		setPage(event.target.value);
 	};
 
-    // swaps between parklist and parkshow pages
-    const [parkPage, setParkPage] = useState('parklist')
-
-    // function for updating which park page is showing
-    const changeParkPage = (event) => {
-		setParkPage(event.target.value);
-	};
-
     // holds national park name for API search and display
     const [chosenPark, setChosenPark] = useState()
 
@@ -46,8 +38,8 @@ function App() {
 			{page === "usershow" ? <UserShow /> : ""}
 
             {/* legs of park section */}
-			{page === "parklist" ? <ParkList changeParkPage={changeParkPage} selectPark={selectPark}/> : ""}
-			{page === "parkshow" ? <ParkShow changeParkPage={changeParkPage} chosenPark={chosenPark}/> : ""}
+			{page === "parklist" ? <ParkList selectPark={selectPark}/> : ""}
+			{page === "parkshow" ? <ParkShow chosenPark={chosenPark}/> : ""}
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
