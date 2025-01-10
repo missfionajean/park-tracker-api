@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import ParkSection from "./components/ParkSection";
 import UserList from "./components/UserList";
 import UserShow from "./components/UserShow";
 import NewUser from "./components/NewUser";
 import Login from "./components/Login";
+import ParkShow from "./components/ParkShow";
+import ParkList from "./components/ParkList";
 
 function App() {
 	// state variable to render current page
@@ -16,13 +17,39 @@ function App() {
 		setPage(event.target.value);
 	};
 
+    // swaps between parklist and parkshow pages
+    const [parkPage, setParkPage] = useState('parklist')
+
+    // function for updating which park page is showing
+    const changeParkPage = (event) => {
+		setParkPage(event.target.value);
+	};
+
+    // holds national park name for API search and display
+    const [chosenPark, setChosenPark] = useState()
+
+    // function to change above (in parklist or usershow)
+    const selectPark = (event) => {
+		setChosenPark(event.target.value);
+	};
+
 	return (
 		<>
+            {/* navbar always displayed */}
 			<Navbar changePage={changePage} />
+            
+            {/* home page shown by default */}
 			{page === "home" ? <Home /> : ""}
+
+            {/* legs of user section */}
 			{page === "userlist" ? <UserList /> : ""}
 			{page === "usershow" ? <UserShow /> : ""}
-			{page === "parksection" ? <ParkSection /> : ""}
+
+            {/* legs of park section */}
+			{page === "parklist" ? <ParkList changeParkPage={changeParkPage} selectPark={selectPark}/> : ""}
+			{page === "parkshow" ? <ParkShow changeParkPage={changeParkPage} chosenPark={chosenPark}/> : ""}
+
+            {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
 			{page === "login" ? <Login /> : ""}
 		</>
