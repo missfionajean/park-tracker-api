@@ -9,6 +9,6 @@ class User(models.Model):
 class Trip(models.Model):
     user_id = models.IntegerField()
     park_name = models.CharField(max_length=100)
-    times_visited = models.IntegerField()
+    date_visited = models.DateField()
     star_rating = models.IntegerField()
 
