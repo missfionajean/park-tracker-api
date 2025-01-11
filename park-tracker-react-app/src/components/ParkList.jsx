@@ -6,13 +6,16 @@ import ParkShow from "/Users/macbook/code/ga/projects/park-tracker-api/park-trac
 function ParkList(props) {
 
 	const [foundList, setFoundList] = useState([])
-	//console.log(foundList)
+	console.log(foundList)
 
-	const [chosenPark, setChosenPark] = useState('')
+	const [chosenPark, setChosenPark] = useState([])
 	console.log(chosenPark)
-	const handleChange = (event) => {
-		setChosenPark(event.target.value)
-		
+	const handleChange = (park) => {
+		setChosenPark(park)	
+	}
+
+	const removeChosenPark = () => {
+		setChosenPark([])
 	}
 	
 	useEffect (() => {
@@ -23,6 +26,7 @@ function ParkList(props) {
 		let JSONdata = await response.json()
 		const parks = JSONdata.data
         const nationalParks = parks.filter((park) => park.designation === "National Park")
+		//console.log(nationalParks)
 		setFoundList(nationalParks);
 	}
 	findParkList();
@@ -30,16 +34,23 @@ function ParkList(props) {
 
 	return (
 		<>
-			<h1>Parks</h1>
-			if click on the name map park.event.target, else do the ul below
 			{ chosenPark != '' ? (
+				<>
+				<br></br>
+			<button onClick={removeChosenPark}>Back to List</button>	
 			<ParkShow chosenPark={chosenPark}/>
-			) : (
+			</>
+			) : ( <>
+				<h1>U.S. National Parks</h1>
 			<ul>
-				{foundList.map((park, index) => (
-					<li key={index}><button onClick={handleChange} value={park.fullName} >{park.fullName}</button></li>
+				{foundList
+				.slice() // Create a shallow copy to avoid mutating the original array, from chatGPT
+				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName, from chatGPT
+				.map((park, index) => (
+					<li key={index}><button onClick={() => handleChange(park)}>{park.fullName}</button></li>
 				))}
 			</ul>
+			</>
 			)
 		}
 		</>

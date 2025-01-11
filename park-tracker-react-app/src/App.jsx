@@ -17,14 +17,15 @@ function App() {
 		setPage(event.target.value);
 	};
 
+	const [blankPark, setBlankPark] = useState('') //state variable to setChosenPark to empty array, to use for the pages NavBar button 
     // holds national park name for API search and display
-    const [chosenPark, setChosenPark] = useState()
-	// console.log(chosenPark)
+    //const [chosenPark, setChosenPark] = useState()
+	// // console.log(chosenPark)
 
-    // function to change above (in parklist or usershow)
-    const selectPark = (event) => {
-		setChosenPark(event.target.value);
-	};
+    // // function to change above (in parklist or usershow)
+    // const selectPark = (event) => {
+	// 	setChosenPark(event.target.value);
+	// };
 
 	return (
 		<>
@@ -39,8 +40,8 @@ function App() {
 			{page === "usershow" ? <UserShow /> : ""}
 
             {/* legs of park section */}
-			{page === "parklist" ? <ParkList selectPark={selectPark}/> : ""}
-			{page === "parkshow" ? <ParkShow chosenPark={chosenPark}/> : ""}
+			{page === "parklist" ? <ParkList/> : ""}
+			{page === "parkshow" ? <ParkShow/> : ""}
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
