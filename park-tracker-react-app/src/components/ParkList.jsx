@@ -3,50 +3,22 @@ import ParkShow from './ParkShow'
 
 function ParkList(props) {
 
-	const [foundList, setFoundList] = useState([])
-	console.log(foundList)
-
-	const [chosenPark, setChosenPark] = useState([])
-	console.log(chosenPark)
-
-	const handleChange = (park) => {
-		setChosenPark(park)	
-	}
-
-	const removeChosenPark = () => {
-		setChosenPark([])
-	}
-	
-	useEffect (() => {
-	const findParkList = async () => {
-		let response = await fetch ( //finds every park in the nps.gov parks database, max limit of 500 results, sorted by releavance score
-			'https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
-		)
-		let JSONdata = await response.json()
-		const parks = JSONdata.data
-        const nationalParks = parks.filter((park) => park.designation === "National Park")
-		//console.log(nationalParks)
-		setFoundList(nationalParks);
-	}
-	findParkList();
-}, [])
-
 	return (
 		<>
-			{ chosenPark != '' ? (
+			{ props.chosenPark != '' ? (
 				<>
 				<br></br>
-			<button onClick={removeChosenPark}>Back to List</button>	
-			<ParkShow chosenPark={chosenPark}/>
+			<button onClick={props.removeChosenPark}>Back to List</button>	
+			<ParkShow chosenPark={props.chosenPark}/>
 			</>
 			) : ( <>
 				<h1>U.S. National Parks</h1>
 			<ul>
-				{foundList
+				{props.foundList
 				.slice() // Create a shallow copy to avoid mutating the original array, from chatGPT
 				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName, from chatGPT
 				.map((park, index) => (
-					<li key={index}><button onClick={() => handleChange(park)}>{park.fullName}</button></li>
+					<li key={index}><button onClick={() => props.handleChange(park)}>{park.fullName}</button></li>
 				))}
 			</ul>
 			</>

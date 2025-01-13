@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import UserList from "./components/UserList";
@@ -17,15 +17,36 @@ function App() {
 		setPage(event.target.value);
 	};
 
-	const [blankPark, setBlankPark] = useState('') //state variable to setChosenPark to empty array, to use for the pages NavBar button 
+	
     // holds national park name for API search and display
-    //const [chosenPark, setChosenPark] = useState()
-	// // console.log(chosenPark)
+    const [chosenPark, setChosenPark] = useState([])
+	console.log(chosenPark)
+	const handleChange = (park) => {
+		setChosenPark(park)	
+	}
 
-    // // function to change above (in parklist or usershow)
-    // const selectPark = (event) => {
-	// 	setChosenPark(event.target.value);
-	// };
+	const removeChosenPark = () => {
+		setChosenPark([])
+	}
+ 
+	//the whole list of National Parks
+	const [foundList, setFoundList] = useState([])
+	console.log(foundList)
+	
+	useEffect (() => {
+	const findParkList = async (event) => {
+		let response = await fetch ( //finds every park in the nps.gov parks database, max limit of 500 results, sorted by releavance score
+			'https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+		)
+		let JSONdata = await response.json()
+		const parks = JSONdata.data
+		const nationalParks = parks.filter((park) => park.designation === "National Park")
+		//console.log(nationalParks)
+		setFoundList(nationalParks);
+	}
+	findParkList();
+}, [])
+  
 
 	return (
 		<>
@@ -40,8 +61,8 @@ function App() {
 			{page === "usershow" ? <UserShow /> : ""}
 
             {/* legs of park section */}
-			{page === "parklist" ? <ParkList/> : ""}
-			{page === "parkshow" ? <ParkShow/> : ""}
+			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}
+			{page === "parkshow" ? <ParkShow chosenPark={chosenPark}/> : ""}
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
