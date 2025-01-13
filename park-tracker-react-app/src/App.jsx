@@ -31,7 +31,7 @@ function App() {
  
 	//the whole list of National Parks
 	const [foundList, setFoundList] = useState([])
-	console.log(foundList)
+	//console.log(foundList)
 	
 	useEffect (() => {
 	const findParkList = async (event) => {
@@ -58,7 +58,7 @@ function App() {
 
             {/* legs of user section */}
 			{page === "userlist" ? <UserList /> : ""}
-			{page === "usershow" ? <UserShow /> : ""}
+			{page === "usershow" ? <UserShow foundList={foundList} chosenPark={chosenPark}/> : ""}
 
             {/* legs of park section */}
 			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}
