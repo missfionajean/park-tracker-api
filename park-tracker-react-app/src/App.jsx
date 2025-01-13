@@ -79,8 +79,8 @@ function App() {
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
-      {page === 'signup' ? <SignUpForm />: ""}
-      {page === 'signin' ? <SignInForm />: ""}
+      {page === 'newuser' ? <SignUpForm />: ""}
+      {page === 'login' ? <SignInForm />: ""}
 		</>
         
 	);
