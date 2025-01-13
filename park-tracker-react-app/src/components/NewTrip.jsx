@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function NewTrip( props, { toggleTripForm }) {
+function NewTrip(props) {
     // state variable for holding national park list
 	// const [foundList, setFoundList] = useState();
 
@@ -52,7 +52,7 @@ function NewTrip( props, { toggleTripForm }) {
 		});
 
 		// un-renders trip add form (resets every re-render)
-		toggleTripForm();
+		props.toggleTripForm();
 	};
 
 	return (
@@ -99,7 +99,7 @@ function NewTrip( props, { toggleTripForm }) {
 			</select>
 
 			{/* buttons to submit or exit form */}
-			<button onClick={toggleTripForm}>Cancel</button>
+			<button onClick={props.toggleTripForm}>Cancel</button>
 			<button type="submit">Submit</button>
 		</form>
 	);
