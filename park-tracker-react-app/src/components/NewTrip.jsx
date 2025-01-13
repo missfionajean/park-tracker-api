@@ -1,24 +1,24 @@
 import { useEffect, useState } from "react";
 
-function NewTrip({ toggleTripForm }) {
+function NewTrip( props, { toggleTripForm }) {
     // state variable for holding national park list
-	const [foundList, setFoundList] = useState();
+	// const [foundList, setFoundList] = useState();
 
-	// same fetch request as park list to populate drop-down
-	useEffect(() => {
-		const findParkList = async () => {
-			let response = await fetch(
-				"https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx"
-			);
-			let JSONdata = await response.json();
-			const parks = JSONdata.data;
-			const nationalParks = parks.filter(
-				(park) => park.designation === "National Park"
-			);
-			setFoundList(nationalParks);
-		};
-		findParkList();
-	}, []);
+	// // same fetch request as park list to populate drop-down
+	// useEffect(() => {
+	// 	const findParkList = async () => {
+	// 		let response = await fetch(
+	// 			"https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx"
+	// 		);
+	// 		let JSONdata = await response.json();
+	// 		const parks = JSONdata.data;
+	// 		const nationalParks = parks.filter(
+	// 			(park) => park.designation === "National Park"
+	// 		);
+	// 		setFoundList(nationalParks);
+	// 	};
+	// 	findParkList();
+	// }, []);
     
 	// JSON object for controlled form
 	const [tripData, setTripData] = useState({
@@ -66,11 +66,11 @@ function NewTrip({ toggleTripForm }) {
 				required
 			>
                 {/* EVERYTHING WORKS EXCEPT THIS! */}
-				{/* {foundList.map((park, index) => (
+				{props.foundList.map((park, index) => (
 					<option value={park.fullName} key={index}>
 						{park.fullName}
 					</option>
-				))} */}
+				))}
 			</select>
 
 			{/* date input assures correct formatting */}

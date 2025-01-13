@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import NewTrip from "./NewTrip";
 
-function UserShow() {
+function UserShow(props) {
 	// url path to show page is baseurl/api/user/userid
 
     const [currentUser, setCurrentUser] = useState(
@@ -82,7 +82,7 @@ function UserShow() {
             <p>{currentUser.travel_preferences}</p>
 
             <h2>Trips</h2>
-            {addTrip ? <NewTrip toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
+            {addTrip ? <NewTrip foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
 
             {tripList.map((trip, index) => (
                 <ul key={index}>
