@@ -50,7 +50,7 @@ function UserShow() {
     const [tripList, setTripList] = useState([]);
     // useEffect function grabs info on page load
 	useEffect(() => {
-		const getAllTrips = async () => { // define function to call it
+		const getAllTrips = async () => {
 			try {
 				const res = await fetch("http://localhost:8000/api/trip");
 				let JSONdata = await res.json();
@@ -90,7 +90,6 @@ function UserShow() {
                         {trip.park_name}
                     </li>
                     <li>
-                        {/* "2018-02-28" */}
                         <span>{months[trip.date_visited.slice(5,7)-1]} </span>
                         <span> {trip.date_visited.slice(-2)},</span>
                         <span> {trip.date_visited.slice(0,4)}</span>
