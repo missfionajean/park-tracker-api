@@ -12,3 +12,4 @@ urlpatterns = [
     path('api/trip', views.TripList.as_view(), name='trip_list'), # api/trips will be routed to the tripList view for handling
     path('api/trip/<int:pk>', views.TripDetail.as_view(), name='trip_detail'), # api/trips will be routed to the ContactDetail view for handling
 ]
+# authoennsa
