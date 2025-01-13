@@ -1,4 +1,12 @@
+import ParkList from "./ParkList";
+
 function Navbar({ changePage }) {
+
+	// const handleClick = () => {
+	// 	changePage
+	// 	removeChosenPark
+	// }
+
 	return (
 		<nav>
 			<button onClick={changePage} value="home">
