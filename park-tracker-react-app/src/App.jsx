@@ -68,6 +68,7 @@ function App() {
 			{page === "newuser" ? <NewUser /> : ""}
 			{page === "login" ? <Login /> : ""}
 		</>
+        
 	);
 }
 

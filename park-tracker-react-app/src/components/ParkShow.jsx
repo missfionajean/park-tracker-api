@@ -1,4 +1,4 @@
-import  '/Users/macbook/code/ga/projects/park-tracker-api/park-tracker-react-app/src/index.css'
+import "../index.css"
 
 function ParkShow(props) {
 
