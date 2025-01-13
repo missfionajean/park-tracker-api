@@ -75,6 +75,17 @@ function UserShow(props) {
         }
     }
 
+    const handleRemove = async (id) => {
+        await fetch(`http://localhost:8000/api/trip/${id}`, {
+			method: "DELETE",
+			// headers: {
+			// 	"Content-Type": "application/json",
+			// },
+			// body: JSON.stringify(tripData),
+		});
+        setTripList(tripList.filter((trip) => trip.id !== id));
+    }
+
 	return (
 		<>
 			<h1>{currentUser.username}</h1>
@@ -104,7 +115,7 @@ function UserShow(props) {
                             <span key={index}>&#9734;</span>
                         ))}
                     </li>
-                    <button>Remove</button>
+                    <button onClick={() => handleRemove(trip.id)}>Remove</button>
                 </ul>
             ))}
 		</>

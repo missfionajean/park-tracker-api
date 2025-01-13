@@ -20,7 +20,7 @@ function App() {
 	
     // holds national park name for API search and display
     const [chosenPark, setChosenPark] = useState([])
-	console.log(chosenPark)
+	//console.log(chosenPark)
 	const handleChange = (park) => {
 		setChosenPark(park)	
 	}
@@ -34,15 +34,26 @@ function App() {
 	//console.log(foundList)
 	
 	useEffect (() => {
-	const findParkList = async (event) => {
+	const findParkList = async () => {
 		let response = await fetch ( //finds every park in the nps.gov parks database, max limit of 500 results, sorted by releavance score
 			'https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
 		)
 		let JSONdata = await response.json()
 		const parks = JSONdata.data
 		const nationalParks = parks.filter((park) => park.designation === "National Park")
-		//console.log(nationalParks)
-		setFoundList(nationalParks);
+		// console.log(nationalParks)
+		let amSamoa = await fetch (
+			'https://developer.nps.gov/api/v1/parks?limit=1&q=american%20samoa%20national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+		)
+		let amSamoaJSON = await amSamoa.json()
+		let denali = await fetch (
+			'https://developer.nps.gov/api/v1/parks?limit=1&q=denali%20national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+		)
+		let denaliJSON = await denali.json()
+		let allParks = [...nationalParks]
+		allParks.push(amSamoaJSON.data[0], denaliJSON.data[0])
+		console.log(allParks)
+		setFoundList(allParks);
 	}
 	findParkList();
 }, [])
