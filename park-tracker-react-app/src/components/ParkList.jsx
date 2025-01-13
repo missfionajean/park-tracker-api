@@ -1,7 +1,5 @@
 import {useState, useEffect} from 'react'
-import ParkShow from "/Users/macbook/code/ga/projects/park-tracker-api/park-tracker-react-app/src/components/ParkShow.jsx";
-
-
+import ParkShow from './ParkShow'
 
 function ParkList(props) {
 
@@ -12,11 +10,10 @@ function ParkList(props) {
 	console.log(chosenPark)
 	const handleChange = (event) => {
 		setChosenPark(event.target.value)
-		
 	}
 	
 	useEffect (() => {
-	const findParkList = async (event) => {
+	const findParkList = async () => {
 		let response = await fetch ( //finds every park in the nps.gov parks database, max limit of 500 results, sorted by releavance score
 			'https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
 		)
