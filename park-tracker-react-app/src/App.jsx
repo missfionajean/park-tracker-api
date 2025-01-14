@@ -8,10 +8,15 @@ import UserShow from "./components/UserShow";
 import NewUser from "./components/NewUser";
 import ParkShow from "./components/ParkShow";
 import ParkList from "./components/ParkList";
+import EditProfile from "./components/EditProfile";
+import * as authService from '../src/services/authService'
 
 function App() {
 	// state variable to render current page
 	const [page, setPage] = useState("home");
+
+	//state variable for a setting a user
+	const [user, setUser] = useState(authService.getUser())
 
 	// function passed to navbar to update page state
 	const changePage = (event) => {
@@ -55,7 +60,7 @@ function App() {
 		let denaliJSON = await denali.json()
 		let allParks = [...nationalParks]
 		allParks.push(amSamoaJSON.data[0], denaliJSON.data[0])
-		console.log(allParks)
+		//console.log(allParks)
 		setFoundList(allParks);
 	}
 	findParkList();
@@ -72,7 +77,7 @@ function App() {
 
             {/* legs of user section */}
 			{page === "userlist" ? <UserList setChosenUser={setChosenUser} setPage={setPage}/> : ""}
-			{page === "usershow" ? <UserShow handleChange={handleChange} changePage={changePage} foundList={foundList} chosenPark={chosenPark} chosenUser={chosenUser}/> : ""}
+			{page === "usershow" ? <UserShow handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
 
             {/* legs of park section */}
 			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}
@@ -80,8 +85,11 @@ function App() {
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
-            {page === 'signup' ? <SignUpForm />: ""}
+            {page === 'signup' ? <SignUpForm setUser={setUser}/>: ""}
             {page === 'signin' ? <SignInForm />: ""}
+
+			{/* EditProfile section */}
+			{page === "editprofile" ? <EditProfile user={user} handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
 		</>
         
 	);

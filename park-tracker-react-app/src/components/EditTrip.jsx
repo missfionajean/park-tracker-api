@@ -86,7 +86,7 @@ function EditTrip (props) {
 			</select>
 
 			{/* buttons to submit or exit form */}
-			<button onClick={props.toggleTripForm}>Cancel</button>
+			<button onClick={props.toggleTripForm(false)}>Cancel</button>
 			<button type="submit">Submit</button>
 		</form>
 		</>

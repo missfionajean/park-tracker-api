@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
+import Cookies from 'js-cookie'
+import * as tripService from "../services/tripService";
 
 function NewTrip(props) {
     
 	// JSON object for controlled form
 	const [tripData, setTripData] = useState({
-		park_name: "",
+		park_name: props.foundList[0].fullName,
 		date_visited: "",
-		star_rating: 0,
-		user_id: 1,
+		star_rating: 1,
+		user_id: props.chosenUser,
 	});
 
 	// for controlled input fields
@@ -24,18 +26,36 @@ function NewTrip(props) {
 		// prevents page reload
 		event.preventDefault();
 		// makes sure rating is submitted as a number
-		// setTripData({
-		// 	...tripData,
-		// 	[tripData.star_rating]: parseInt(tripData.star_rating),
-		// });
+		setTripData({
+			...tripData,
+			[tripData.star_rating]: parseInt(tripData.star_rating),
+		});
 		// post request to park_tracker_api
 		await fetch("http://localhost:8000/api/trip", {
 			method: "POST",
 			headers: {
+				Authorization: `Bearer ${Cookies.get("jwtToken")}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(tripData),
 		});
+
+		const getTrips = async () => {
+					try {
+					// 	const res = await fetch("http://localhost:8000/api/trip",
+					//         // {headers: { Authorization: `Bearer ${Cookies.get("jwtToken")}` }}
+					//     );
+					// 	let JSONdata = await res.json();
+					//     let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
+					// 	setTripList(filteredList);
+						const getTrip = await tripService.getAllTrips()
+						props.setTripList(getTrip)
+						// return getTrip
+					} catch (err) {
+						console.log(err);
+					}
+				};
+				getTrips();
 
 		// un-renders trip add form (resets every re-render)
 		props.toggleTripForm();
@@ -49,7 +69,7 @@ function NewTrip(props) {
 				name="park_name"
 				value={tripData.park_name}
 				onChange={handleInput}
-				required
+				// required
 			>
                 {/* EVERYTHING WORKS EXCEPT THIS! */}
 				{props.foundList.map((park, index) => (
@@ -75,7 +95,7 @@ function NewTrip(props) {
 				name="star_rating"
 				value={tripData.star_rating}
 				onChange={handleInput}
-				required
+				// required
 			>
 				<option>1</option>
 				<option>2</option>

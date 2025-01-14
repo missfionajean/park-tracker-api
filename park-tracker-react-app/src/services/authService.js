@@ -18,7 +18,7 @@ export const signup = async (formData) => {
 
 export const signin = async (user) => {
   try {
-    const res = await fetch(`${djangoApiUrl}/auth-token`, {
+    const res = await fetch(`http://localhost:8000/api/auth-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

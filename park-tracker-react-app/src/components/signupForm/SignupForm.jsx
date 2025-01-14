@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as authService from "../../services/authService";
-const SignUpForm = () => {
+const SignUpForm = (props) => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -15,7 +15,8 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await authService.signup(formData);
+      const newUserResponse = await authService.signup(formData);
+      props.setUser(newUserResponse.user)
     } catch (error) {
       console.log(error.message);
     }
