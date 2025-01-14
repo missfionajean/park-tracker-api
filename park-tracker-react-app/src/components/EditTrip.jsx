@@ -28,6 +28,16 @@ function EditTrip (props) {
 
 		// un-renders trip add form (resets every re-render)
 		props.toggleTripForm();
+		const getAllTrips = async () => {
+			try {
+				const res = await fetch("http://localhost:8000/api/trip");
+				let JSONdata = await res.json();
+				setTripList(JSONdata);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getAllTrips();
         props.handleShowEdit();
 	};
 
