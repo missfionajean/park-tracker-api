@@ -1,26 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function NewTrip(props) {
-    
-	// JSON object for controlled form
-	const [tripData, setTripData] = useState({
-		park_name: "",
-		date_visited: "",
-		star_rating: 0,
-		user_id: 1,
-	});
+function EditTrip (props) {
 
-	// for controlled input fields
-	const handleInput = (event) => {
-		console.log(event.target.name, event.target.value)
-		setTripData((tripData) => ({ //tripData callback function used here to guaruntee the latest state is used and then updated. something was happening for these to update out of order(?), and the park name was not being updated and sent in the request
-			...tripData,
-			[event.target.name]: event.target.value,
-		}))
-		// setTripData({ ...tripData, [event.target.name]: event.target.value });
-	};
-	// performs submit actions for form
-	const handleSubmit = async (event) => {
+    const [tripData, setTripData] = useState({
+        park_name: props.tripToEdit.park_name,
+        date_visited: props.tripToEdit.date_visited,
+        star_rating: props.tripToEdit.star_rating,
+        user_id: props.tripToEdit.user_id,
+    });
+
+    const handleSubmit = async (event) => {
 		// prevents page reload
 		event.preventDefault();
 		// makes sure rating is submitted as a number
@@ -29,8 +18,8 @@ function NewTrip(props) {
 		// 	[tripData.star_rating]: parseInt(tripData.star_rating),
 		// });
 		// post request to park_tracker_api
-		await fetch("http://localhost:8000/api/trip", {
-			method: "POST",
+		await fetch(`http://localhost:8000/api/trip/${props.tripToEdit.id}`, {
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -39,10 +28,22 @@ function NewTrip(props) {
 
 		// un-renders trip add form (resets every re-render)
 		props.toggleTripForm();
+        props.handleShowEdit();
 	};
 
+    const handleInput = (event) => {
+		console.log(event.target.name, event.target.value)
+		setTripData((tripData) => ({ //tripData callback function used here to guaruntee the latest state is used and then updated. something was happening for these to update out of order(?), and the park name was not being updated and sent in the request
+			...tripData,
+			[event.target.name]: event.target.value,
+		}))
+    }
+
 	return (
-		<form onSubmit={handleSubmit}>
+		<>
+			<h1>This is the EditTrip page!</h1>
+            <h2>{props.tripToEdit.id}</h2>
+            <form onSubmit={handleSubmit}>
 			{/* options generated from 3rd party API */}
 			<label htmlFor="park_name">Park: </label>
 			<select
@@ -88,7 +89,9 @@ function NewTrip(props) {
 			<button onClick={props.toggleTripForm}>Cancel</button>
 			<button type="submit">Submit</button>
 		</form>
+		</>
 	);
+
 }
 
-export default NewTrip;
+export default EditTrip;

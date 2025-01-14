@@ -20,8 +20,3 @@ class TripSerializer(serializers.ModelSerializer): # serializers.ModelSerializer
     class Meta:
         model = Trip # tell django which model to use
         fields = ('id', 'park_name', 'date_visited', 'star_rating', 'user_id',) # tell django which fields to include
-        
-        
-    
-
-
