@@ -1,6 +1,7 @@
 const djangoApiUrl = import.meta.env.VITE_DJANGO_API_URL;
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+
 export const signup = async (formData) => {
   try {
     const res = await fetch(`${djangoApiUrl}/user`, {
@@ -11,13 +12,13 @@ export const signup = async (formData) => {
     const jsonData = await res.json();
     return jsonData;
   } catch (error) {
-    console.log("eroor signing up", error.message);
+    console.log("error signing up", error.message);
   }
 };
 
 export const signin = async (user) => {
   try {
-    const res = await fetch(`${djangoApiUrl}/user`, {
+    const res = await fetch(`${djangoApiUrl}/auth-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

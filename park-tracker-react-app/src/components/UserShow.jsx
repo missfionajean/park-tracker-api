@@ -6,14 +6,12 @@ import EditTrip from "./EditTrip";
 function UserShow(props) {
 	// url path to show page is baseurl/api/user/userid
 
-    const [currentUser, setCurrentUser] = useState(
-        {
-            id: 1,
-            username: "missfionajean",
-            location: "Yonkers, New York",
-            travel_preferences: "Glamping only please!",
-        }
-    )
+    const [currentUser, setCurrentUser] = useState({
+            username: "",
+            password: "",
+            location: "",
+            travel_preferences: ""
+    })
 
     // triplist will likely be a fetch request on this page
     const sampleTripList = [
@@ -48,9 +46,9 @@ function UserShow(props) {
     ]
 
     // state variable updated on page load and new trip submit
-    const [tripList, setTripList] = useState([]);
+    const [tripList, setTripList] = useState(sampleTripList);
     // useEffect function grabs info on page load
-	useEffect(() => {
+	/* useEffect(() => {
 		const getAllTrips = async () => {
 			try {
 				const res = await fetch("http://localhost:8000/api/trip");
@@ -61,7 +59,23 @@ function UserShow(props) {
 			}
 		};
 		getAllTrips();
-	}, []);
+	}, []); */
+
+    // grab chosen user from database
+    useEffect(() => {
+		const getUserInfo = async () => {
+			try {
+				const res = await fetch(`http://localhost:8000/api/user/${props.chosenUser}`);
+				let JSONdata = await res.json();
+                console.log(JSONdata)
+				setCurrentUser(JSONdata);
+                console.log(currentUser)
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getUserInfo();
+	}, [])
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -120,8 +134,8 @@ function UserShow(props) {
             <h2>Trips</h2>
             
             {addTrip ? <NewTrip foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
-            {tripList.map((trip, index) => (
-                <ul key={index}>
+            {tripList.map((trip) => (
+                <ul key={trip.id}>
                     <li>
                         <button>{trip.park_name}</button>
                     </li>

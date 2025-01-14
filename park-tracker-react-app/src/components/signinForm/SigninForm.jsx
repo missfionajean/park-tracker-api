@@ -9,6 +9,7 @@ const SignInForm = () => {
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -17,6 +18,7 @@ const SignInForm = () => {
       console.log(error.message);
     }
   };
+
   return (
     <>
       <h2>Sign In</h2>

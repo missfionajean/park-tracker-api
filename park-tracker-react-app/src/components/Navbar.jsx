@@ -1,5 +1,3 @@
-import ParkList from "./ParkList";
-
 function Navbar({ changePage }) {
 
 	// const handleClick = () => {
@@ -21,10 +19,10 @@ function Navbar({ changePage }) {
 			<button onClick={changePage} value="parklist">
 				Parks
 			</button>
-			<button onClick={changePage} value="newuser">
+			<button onClick={changePage} value="signup">
 				Sign Up
 			</button>
-			<button onClick={changePage} value="login">
+			<button onClick={changePage} value="signin">
 				Login
 			</button>
 		</nav>
