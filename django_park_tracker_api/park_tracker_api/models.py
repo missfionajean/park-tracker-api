@@ -1,14 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 import bcrypt
 from django.db import models
-# Create your models here.
+
 class Usermodel(AbstractUser):
     username = models.CharField(max_length=32, unique = True)
     password = models.CharField(max_length= 200, default= '' )
     location = models.CharField(max_length=32)
     travel_preferences = models.CharField(max_length=200)
    
-    
     def set_password(self, raw_password): #define the function to hash the password
         password_bytes = raw_password.encode('utf-8') #convert it into a byte string(required by bcrypt)
         salt = bcrypt.gensalt()

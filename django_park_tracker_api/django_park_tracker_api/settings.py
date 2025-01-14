@@ -85,7 +85,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'park_tracker_api',
         'USER': '',
-        'PASSWORD': '',
+        'PASSWORD': 'Violet118',
         'HOST': 'localhost'
     }
 }
