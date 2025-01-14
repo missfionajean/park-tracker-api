@@ -6,7 +6,6 @@ import Home from "./components/Home";
 import UserList from "./components/UserList";
 import UserShow from "./components/UserShow";
 import NewUser from "./components/NewUser";
-import Login from "./components/Login";
 import ParkShow from "./components/ParkShow";
 import ParkList from "./components/ParkList";
 
@@ -19,7 +18,6 @@ function App() {
 		setPage(event.target.value);
 	};
 
-	
     // holds national park name for API search and display
     const [chosenPark, setChosenPark] = useState([])
 	//console.log(chosenPark)
@@ -30,6 +28,9 @@ function App() {
 	const removeChosenPark = () => {
 		setChosenPark([])
 	}
+
+    // state variable for switching user show page
+    const [chosenUser, setChosenUser] = useState()
  
 	//the whole list of National Parks
 	const [foundList, setFoundList] = useState([])
@@ -70,8 +71,8 @@ function App() {
 			{page === "home" ? <Home /> : ""}
 
             {/* legs of user section */}
-			{page === "userlist" ? <UserList /> : ""}
-			{page === "usershow" ? <UserShow handleChange={handleChange} changePage={changePage} foundList={foundList} chosenPark={chosenPark}/> : ""}
+			{page === "userlist" ? <UserList setChosenUser={setChosenUser} setPage={setPage}/> : ""}
+			{page === "usershow" ? <UserShow handleChange={handleChange} changePage={changePage} foundList={foundList} chosenPark={chosenPark} chosenUser={chosenUser}/> : ""}
 
             {/* legs of park section */}
 			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}
@@ -79,8 +80,8 @@ function App() {
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
-      {page === 'signup' ? <SignUpForm />: ""}
-      {page === 'signin' ? <SignInForm />: ""}
+            {page === 'signup' ? <SignUpForm />: ""}
+            {page === 'signin' ? <SignInForm />: ""}
 		</>
         
 	);
