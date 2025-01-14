@@ -1,3 +1,5 @@
+import SignUpForm from "./components/signupForm/SignupForm";
+import SignInForm from "./components/signinForm/SigninForm";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
@@ -77,7 +79,8 @@ function App() {
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
-			{page === "login" ? <Login /> : ""}
+      {page === 'signup' ? <SignUpForm />: ""}
+      {page === 'signin' ? <SignInForm />: ""}
 		</>
         
 	);
@@ -95,3 +98,4 @@ user profile snippet
 park show page (no edit, pulled from 3rd party API)
 add/edit trip form
 */
+
