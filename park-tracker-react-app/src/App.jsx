@@ -69,7 +69,7 @@ function App() {
 
             {/* legs of user section */}
 			{page === "userlist" ? <UserList /> : ""}
-			{page === "usershow" ? <UserShow foundList={foundList} chosenPark={chosenPark}/> : ""}
+			{page === "usershow" ? <UserShow changePage={changePage} foundList={foundList} chosenPark={chosenPark}/> : ""}
 
             {/* legs of park section */}
 			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}

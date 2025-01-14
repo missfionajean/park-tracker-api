@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import NewTrip from "./NewTrip";
+import EditTrip from "./EditTrip";
 
 function UserShow(props) {
 	// url path to show page is baseurl/api/user/userid
@@ -86,15 +87,35 @@ function UserShow(props) {
         setTripList(tripList.filter((trip) => trip.id !== id));
     }
 
+    const handleEditClick = async (trip) => {
+        setShowEdit(true)
+        setTripToEdit(trip)
+    }
+
+    const handleShowEdit = async () => {
+        setShowEdit(false)
+    }
+
+    //edit page state variable
+    const [showEdit, setShowEdit] = useState(false)
+
+    //set edit trip state variable
+    const [tripToEdit, setTripToEdit] = useState('')
+
 	return (
 		<>
+
+            {showEdit === true ? (
+                <>
+                 <EditTrip tripToEdit={tripToEdit} tripList={tripList} toggleTripForm={toggleTripForm} foundList={props.foundList} handleShowEdit={handleShowEdit} showEdit={showEdit}/>
+                </>
+            ) : ( <>
 			<h1>{currentUser.username}</h1>
 			<h2>{currentUser.location}</h2>
             <p>{currentUser.travel_preferences}</p>
-
             <h2>Trips</h2>
+            
             {addTrip ? <NewTrip foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
-
             {tripList.map((trip, index) => (
                 <ul key={index}>
                     <li>
@@ -116,8 +137,14 @@ function UserShow(props) {
                         ))}
                     </li>
                     <button onClick={() => handleRemove(trip.id)}>Remove</button>
+                    <button onClick={() => handleEditClick(trip)}>Edit</button>
+                    
                 </ul>
+                
             ))}
+            </>
+        )
+}
 		</>
 	);
 }
