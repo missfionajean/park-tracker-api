@@ -102,6 +102,10 @@ function UserShow(props) {
     //set edit trip state variable
     const [tripToEdit, setTripToEdit] = useState('')
 
+    // const handleChosenPark = async () => {
+    //     props.setChosenPark()
+    // }
+
 	return (
 		<>
 
@@ -119,7 +123,7 @@ function UserShow(props) {
             {tripList.map((trip, index) => (
                 <ul key={index}>
                     <li>
-                        {trip.park_name}
+                        <button>{trip.park_name}</button>
                     </li>
                     <li>
                         <span>{months[trip.date_visited.slice(5,7)-1]} </span>
