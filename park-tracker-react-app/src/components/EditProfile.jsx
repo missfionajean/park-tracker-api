@@ -63,7 +63,7 @@ function EditProfile (props) {
 			}
 		};
 		getTrips();
-	}, [])
+	}, [props.user])
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -130,7 +130,7 @@ function EditProfile (props) {
 
 			<h1>{currentUser.username}</h1>
 			<h2>{currentUser.location}</h2>
-            <p>{currentUser.travel_preferences}</p>
+            <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
             <h2>Trips</h2>
             
             {addTrip ? <NewTrip setTripList={setTripList} chosenUser={currentUser.id} foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
@@ -138,7 +138,7 @@ function EditProfile (props) {
             .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
             .map((trip) => (
                 <ul key={trip.id}>
-                    <li onClick={() => handleChosenPark(trip.park_name)}>
+                    <li onClick={() => handleChosenPark(trip.park_name)} className="parkName">
                         {trip.park_name}
                     </li>
                     <li>
@@ -156,8 +156,10 @@ function EditProfile (props) {
                             <span key={index}>&#9734;</span>
                         ))}
                     </li>
-                    <button onClick={() => handleRemove(trip.id)}>Remove</button>
-                    <button onClick={() => handleEditClick(trip)}>Edit</button>
+                    <div className="removeEdit">
+                    <button onClick={() => handleRemove(trip.id)} className="remove">Remove</button>
+                    <button onClick={() => handleEditClick(trip)} className="edit">Edit</button>
+                    </div>
                     
                 </ul>
                 

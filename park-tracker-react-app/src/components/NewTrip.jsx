@@ -106,8 +106,10 @@ function NewTrip(props) {
 			</select>
 
 			{/* buttons to submit or exit form */}
-			<button onClick={props.toggleTripForm}>Cancel</button>
-			<button type="submit">Submit</button>
+			<div>
+			<button onClick={props.toggleTripForm} id="cancelButton" className="newTripButtons">Cancel</button>
+			<button type="submit" id="submitButton" className="newTripButtons">Submit</button>
+			</div>
 		</form>
 	);
 }
