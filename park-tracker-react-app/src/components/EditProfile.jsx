@@ -4,25 +4,27 @@ import NewTrip from "./NewTrip";
 import EditTrip from "./EditTrip";
 import Cookies from 'js-cookie'
 import * as tripService from "../services/tripService";
+import * as authService from '../services/authService'
+import { signout } from "../services/authService";
 
 function EditProfile (props) {
 	// url path to show page is baseurl/api/user/userid
 
     const [currentUser, setCurrentUser] = useState({
-            username: "",
-            password: "",
-            location: "",
-            travel_preferences: ""
+        id: null,
+        username: "",
+        location: "",
+        travel_preferences: ""
     })
 
     // state variable updated on page load and new trip submit
     const [tripList, setTripList] = useState([
         {
-            "id": null,
-            "park_name": "",
-            "date_visited": "",
-            "star_rating": null,
-            "user_id": null
+            id: null,
+            park_name: "",
+            date_visited: "",
+            star_rating: null,
+            user_id: null
         }
     ]);
    
@@ -32,7 +34,7 @@ function EditProfile (props) {
         // logic to grab user info based on link clicked
 		const getUserInfo = async () => {
 			try {
-				const res = await fetch(`http://localhost:8000/api/user/${props.chosenUser}`);
+				const res = await fetch(`http://localhost:8000/api/user/${authService.getUser().user_id}`);
 				let JSONdata = await res.json();
                 console.log(JSONdata)
 				setCurrentUser(JSONdata);
@@ -50,10 +52,11 @@ function EditProfile (props) {
                     // {headers: { Authorization: `Bearer ${Cookies.get("jwtToken")}` }}
                 );
 				let JSONdata = await res.json();
-                let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
+                let filteredList = JSONdata.filter((trip) => trip.user_id === authService.getUser().user_id);
 				setTripList(filteredList);
-                // const getTrip = await tripService.getAllTrips()
-                // setTripList(getTrip)
+                // // const getTrip = await tripService.getAllTrips()
+                // const filteredTrips = getTrip.filter((trip) => trip.user_id === currentUser.id)
+                // setTripList(filteredTrips)
                 // return getTrip
 			} catch (err) {
 				console.log(err);
@@ -111,20 +114,26 @@ function EditProfile (props) {
     //     props.setChosenPark()
     // }
 
+    const signOut = () => {
+        signout()
+        props.setPage("home")
+    }
+
 	return (
 		<>
-
+            <button onClick={signOut}>Sign Out</button>
             {showEdit === true ? (
                 <>
                  <EditTrip tripToEdit={tripToEdit} tripList={tripList} toggleTripForm={toggleTripForm} foundList={props.foundList} handleShowEdit={handleShowEdit} showEdit={showEdit}/>
                 </>
             ) : ( <>
+
 			<h1>{currentUser.username}</h1>
 			<h2>{currentUser.location}</h2>
             <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
             <h2>Trips</h2>
             
-            {addTrip ? <NewTrip setTripList={setTripList} chosenUser={props.chosenUser} foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
+            {addTrip ? <NewTrip setTripList={setTripList} chosenUser={currentUser.id} foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
             {tripList
             .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
             .map((trip) => (
