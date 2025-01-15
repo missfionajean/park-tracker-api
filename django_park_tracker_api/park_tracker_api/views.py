@@ -20,7 +20,11 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class TripList(generics.ListCreateAPIView):
     queryset = Trip.objects.all().order_by('id') # tell django how to retrieve all objects from the DB, order by id ascending
     serializer_class = TripSerializer # tell django what serializer to use
+    authentication_classes = []
+    permission_classes = [AllowAny]
 
 class TripDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Trip.objects.all().order_by('id')
     serializer_class = TripSerializer
+    authentication_classes = []
+    permission_classes = [AllowAny]

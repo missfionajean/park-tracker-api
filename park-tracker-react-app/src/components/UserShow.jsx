@@ -14,11 +14,11 @@ function UserShow(props) {
     // state variable updated on page load and new trip submit
     const [tripList, setTripList] = useState([
         {
-            "id": null,
-            "park_name": "",
-            "date_visited": "",
-            "star_rating": null,
-            "user_id": null
+            id: null,
+            park_name: "",
+            date_visited: "",
+            star_rating: null,
+            user_id: null
         }
     ]);
    

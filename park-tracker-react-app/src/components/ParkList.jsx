@@ -18,7 +18,7 @@ function ParkList(props) {
 				.slice() // Create a shallow copy to avoid mutating the original array, from chatGPT
 				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName, from chatGPT
 				.map((park, index) => (
-					<li key={index}><button onClick={() => props.handleChange(park)}>{park.fullName}</button></li>
+					<li key={index} onClick={() => props.handleChange(park)}>{park.fullName}</li>
 				))}
 			</ul>
 			</>

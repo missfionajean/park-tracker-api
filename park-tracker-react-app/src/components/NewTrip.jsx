@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Cookies from 'js-cookie'
 import * as tripService from "../services/tripService";
+import * as authService from "../services/authService";
 
 function NewTrip(props) {
     
@@ -34,7 +35,6 @@ function NewTrip(props) {
 		await fetch("http://localhost:8000/api/trip", {
 			method: "POST",
 			headers: {
-				Authorization: `Bearer ${Cookies.get("jwtToken")}`,
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(tripData),
@@ -49,7 +49,8 @@ function NewTrip(props) {
 					//     let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
 					// 	setTripList(filteredList);
 						const getTrip = await tripService.getAllTrips()
-						props.setTripList(getTrip)
+                        const filteredTrips = getTrip.filter((trip) => trip.user_id === authService.getUser().user_id);
+						props.setTripList(filteredTrips)
 						// return getTrip
 					} catch (err) {
 						console.log(err);

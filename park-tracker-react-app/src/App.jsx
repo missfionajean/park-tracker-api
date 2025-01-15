@@ -9,14 +9,10 @@ import NewUser from "./components/NewUser";
 import ParkShow from "./components/ParkShow";
 import ParkList from "./components/ParkList";
 import EditProfile from "./components/EditProfile";
-import * as authService from '../src/services/authService'
 
 function App() {
 	// state variable to render current page
 	const [page, setPage] = useState("home");
-
-	//state variable for a setting a user
-	const [user, setUser] = useState(authService.getUser())
 
 	// function passed to navbar to update page state
 	const changePage = (event) => {
@@ -85,11 +81,11 @@ function App() {
 
             {/* legs of authentication section */}
 			{page === "newuser" ? <NewUser /> : ""}
-            {page === 'signup' ? <SignUpForm setUser={setUser}/>: ""}
+            {page === 'signup' ? <SignUpForm />: ""}
             {page === 'signin' ? <SignInForm />: ""}
 
 			{/* EditProfile section */}
-			{page === "editprofile" ? <EditProfile user={user} handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
+			{page === "editprofile" ? <EditProfile handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
 		</>
         
 	);
