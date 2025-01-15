@@ -46,21 +46,21 @@ function EditProfile (props) {
         // logic to grab all trip info from sql database
         const getTrips = async () => {
 			try {
-			// 	const res = await fetch("http://localhost:8000/api/trip",
-            //         // {headers: { Authorization: `Bearer ${Cookies.get("jwtToken")}` }}
-            //     );
-			// 	let JSONdata = await res.json();
-            //     let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
-			// 	setTripList(filteredList);
-                const getTrip = await tripService.getAllTrips()
-                setTripList(getTrip)
+				const res = await fetch("http://localhost:8000/api/trip",
+                    // {headers: { Authorization: `Bearer ${Cookies.get("jwtToken")}` }}
+                );
+				let JSONdata = await res.json();
+                let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
+				setTripList(filteredList);
+                // const getTrip = await tripService.getAllTrips()
+                // setTripList(getTrip)
                 // return getTrip
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		getTrips();
-	}, [])
+	}, [props.user])
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -121,7 +121,7 @@ function EditProfile (props) {
             ) : ( <>
 			<h1>{currentUser.username}</h1>
 			<h2>{currentUser.location}</h2>
-            <p>{currentUser.travel_preferences}</p>
+            <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
             <h2>Trips</h2>
             
             {addTrip ? <NewTrip setTripList={setTripList} chosenUser={props.chosenUser} foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
@@ -129,7 +129,7 @@ function EditProfile (props) {
             .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
             .map((trip) => (
                 <ul key={trip.id}>
-                    <li onClick={() => handleChosenPark(trip.park_name)}>
+                    <li onClick={() => handleChosenPark(trip.park_name)} className="parkName">
                         {trip.park_name}
                     </li>
                     <li>
@@ -147,8 +147,10 @@ function EditProfile (props) {
                             <span key={index}>&#9734;</span>
                         ))}
                     </li>
-                    <button onClick={() => handleRemove(trip.id)}>Remove</button>
-                    <button onClick={() => handleEditClick(trip)}>Edit</button>
+                    <div className="removeEdit">
+                    <button onClick={() => handleRemove(trip.id)} className="remove">Remove</button>
+                    <button onClick={() => handleEditClick(trip)} className="edit">Edit</button>
+                    </div>
                     
                 </ul>
                 

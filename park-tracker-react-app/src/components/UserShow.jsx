@@ -65,14 +65,14 @@ function UserShow(props) {
 		<>
 			<h1>{currentUser.username}</h1>
 			<h2>{currentUser.location}</h2>
-            <p>{currentUser.travel_preferences}</p>
+            <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
             <h2>Trips</h2>
             
             {tripList
             .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
             .map((trip) => (
                 <ul key={trip.id}>
-                    <li onClick={() => handleChosenPark(trip.park_name)}>
+                    <li onClick={() => handleChosenPark(trip.park_name)} className="parkName">
                         {trip.park_name}
                     </li>
                     <li>

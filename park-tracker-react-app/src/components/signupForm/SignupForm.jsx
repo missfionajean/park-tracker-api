@@ -27,7 +27,7 @@ const SignUpForm = (props) => {
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username: </label>
           <input
             type="text"
             id="username"
@@ -37,7 +37,7 @@ const SignUpForm = (props) => {
           />
         </p>
         <p>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             id="password"
@@ -47,7 +47,7 @@ const SignUpForm = (props) => {
           />
         </p>
         <p>
-          <label htmlFor="location">Location</label>
+          <label htmlFor="location">Location: </label>
           <input
             type="location"
             id="location"
@@ -57,7 +57,7 @@ const SignUpForm = (props) => {
           />
         </p>
         <p>
-          <label htmlFor="travel_preferences">Travel Preferences</label>
+          <label htmlFor="travel_preferences">Accommodation Preferences: </label>
           <input
             type="travel_preferences"
             id="travel_preferences"
