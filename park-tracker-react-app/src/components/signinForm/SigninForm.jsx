@@ -24,7 +24,7 @@ const SignInForm = () => {
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
         <p>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">Username: </label>
           <input
             type="text"
             id="username"
@@ -34,7 +34,7 @@ const SignInForm = () => {
           />
         </p>
         <p>
-          <label htmlFor="password">password</label>
+          <label htmlFor="password">Password: </label>
           <input
             type="password"
             id="password"
