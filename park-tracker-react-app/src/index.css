@@ -1,105 +1,129 @@
- :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	line-height: 1.5;
+	font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(248, 3, 199, 0.87);
-  background-color: #fce701;
+	color-scheme: light dark;
+	color: rgba(248, 3, 199, 0.87);
+	background-color: #fce701;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
+* {
+	box-sizing: border-box;
+    margin: 0;
+}
+
+
 #submitButton {
-  background-color: blue;
+	background-color: blue;
 }
 
 #cancelButton {
-  background-color: red;
+	background-color: red;
 }
 
 .newTripButtons {
-  /* border: 5px ridge greenyellow; */
-  /* display: flex;
+	/* border: 5px ridge greenyellow; */
+	/* display: flex;
   justify-content: space-between; */
-  margin-left: 10px;
-  margin-top: 10px;
+	margin-left: 10px;
+	margin-top: 10px;
 }
 
 .accomidation {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .parkName {
-  cursor: pointer;
+	cursor: pointer;
 }
 
 .parkList {
-  list-style-type: none;
+	list-style-type: none;
 }
 
 .parkListItem {
-  margin: 0 0 10px 0;
+	margin: 0 0 10px 0;
 }
 
 .parkListButton {
-  background-color: rgb(251, 6, 255);
+	background-color: rgb(251, 6, 255);
 }
 
 .userShowList {
-  font-size: 40px;
-  list-style-type: none;
-  cursor: pointer;
+	font-size: 40px;
+	list-style-type: none;
+	cursor: pointer;
 }
 
-.navBar {
-  display: flex;
-  border: 5px ridge rgb(1, 244, 248);
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 5px;
+nav {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	width: 100dvw;
+    background-color: gray;
+    color: white;
+}
+
+.hamListDiv {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+
+.navButton {
+    width: 100dvw;
+    text-align: center;
+    padding: 5px 0;
+}
+
+.navButton:hover {
+    background-color: green;
 }
 
 .removeEdit {
-  display: flex;
-  justify-content: space-between;
-  /* border: 5px ridge greenyellow; */
-  width: 17%;
-  padding-left: -5%;
+	display: flex;
+	justify-content: space-between;
+	/* border: 5px ridge greenyellow; */
+	width: 17%;
+	padding-left: -5%;
 }
 
 .edit {
-  background-color: rgb(106, 255, 0);
-  color: rgb(4, 0, 0);
+	background-color: rgb(106, 255, 0);
+	color: rgb(4, 0, 0);
 }
 
 .remove {
-  background-color: rgb(251, 7, 251);
+	background-color: rgb(251, 7, 251);
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1.10em;
-  font-weight: 500;
-  font-family: inherit;
-  color: rgb(253, 253, 253);
-  background-color: orange;
-  cursor: pointer;
-  transition: border-color 0.25s;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1.1em;
+	font-weight: 500;
+	font-family: inherit;
+	color: rgb(253, 253, 253);
+	background-color: orange;
+	cursor: pointer;
+	transition: border-color 0.25s;
 }
 
 button:hover {
-  border-color: #55ff00;
+	border-color: #55ff00;
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+	outline: 4px auto -webkit-focus-ring-color;
 }
 
 /* a {
@@ -138,6 +162,6 @@ h1 {
 } */
 
 #parkImage {
-  max-width: 75%;
-  height: auto;
+	max-width: 75%;
+	height: auto;
 }

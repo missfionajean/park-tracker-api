@@ -1,33 +1,51 @@
 // import "/Users/macbook/code/ga/projects/park-tracker-api/park-tracker-react-app/App.css"
 
-function Navbar({ changePage }) {
+import { useState } from "react";
+import { Squash as Hamburger } from "hamburger-react";
 
-	// const handleClick = () => {
-	// 	changePage
-	// 	removeChosenPark
-	// }
+function Navbar({ setPage }) {
+
+    // state variable for open/close hamburger
+	const [isOpen, setOpen] = useState(false);
+
+    // passes button click value for changePage function
+	const handleClick = (page) => {
+		setPage(page);
+		setOpen(false);
+	};
 
 	return (
-		<nav className="navBar">
-			<button onClick={changePage} value="home" className="navButton">
+        <nav>
+            <Hamburger toggled={isOpen} size={20} toggle={setOpen}/>
+
+            {isOpen ? <div className="hamListDiv">
+
+            <p onClick={() => handleClick("home")} className="navButton">
 				Home
-			</button>
-			<button onClick={changePage} value="userlist" className="navButton">
+			</p>
+
+			<p onClick={() => handleClick("userlist")} className="navButton">
 				Users
-			</button>
-			<button onClick={changePage} value="editprofile" className="navButton">
+			</p>
+
+			<p onClick={() => handleClick("editprofile")} className="navButton">
 				Edit Profile
-			</button>
-			<button onClick={changePage} value="parklist" className="navButton">
+			</p>
+
+			<p onClick={() => handleClick("parklist")} className="navButton">
 				Parks
-			</button>
-			<button onClick={changePage} value="signup" className="navButton">
+			</p>
+
+			<p onClick={() => handleClick("signup")} className="navButton">
 				Sign Up
-			</button>
-			<button onClick={changePage} value="signin" className="navButton">
+			</p>
+
+			<p onClick={() => handleClick("signin")} className="navButton">
 				Login
-			</button>
-		</nav>
+			</p>
+
+            </div> : ''}
+        </nav>
 	);
 }
 
