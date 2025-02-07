@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 function UserShow(props) {
 	// url path to show page is baseurl/api/user/userid
@@ -63,35 +64,55 @@ function UserShow(props) {
 
 	return (
 		<>
+            <button onClick={() => props.setPage("userlist")}>&#10094; Back to List</button>
+
+            {/* headline */}
 			<h1>{currentUser.username}</h1>
-			<h2>{currentUser.location}</h2>
-            <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
+
+            {/* basic user info */}
+            <div className="userInfo">
+                <div className="userLocation">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" color="skyblue" />
+                    <h2>{currentUser.location}</h2>
+                </div>
+                <div>
+                    <h3>Accommodation Preferences:</h3>
+                    <p>{currentUser.travel_preferences}</p>
+                </div>
+            </div>
+
+            {/* trip cards */}
             <h2>Trips</h2>
-            
-            {tripList
-            .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
-            .map((trip) => (
-                <ul key={trip.id}>
-                    <li onClick={() => handleChosenPark(trip.park_name)} className="parkName">
-                        {trip.park_name}
-                    </li>
-                    <li>
-                        <span>{months[trip.date_visited.slice(5,7)-1]} </span>
-                        <span> {trip.date_visited.slice(-2)},</span>
-                        <span> {trip.date_visited.slice(0,4)}</span>
-                    </li>
-                    <li>
-                        {/* displays filled stars */}
-                        {Array(trip.star_rating).fill(0).map((_,index) => (
-                            <span key={index}>&#9733;</span>
-                        ))}
-                        {/* displays remainder as unfilled */}
-                        {Array(5 - trip.star_rating).fill(0).map((_,index) => (
-                            <span key={index}>&#9734;</span>
-                        ))}
-                    </li>
-                </ul>
-            ))}
+            <div className="tripList">
+                {tripList
+                .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
+                .map((trip) => (
+                    <div key={trip.id} className="tripCard">
+                        <div>
+                            <p onClick={() => handleChosenPark(trip.park_name)} className="parkName">
+                                {trip.park_name}
+                            </p>
+                            <p>
+                                <span>{months[trip.date_visited.slice(5,7)-1]} </span>
+                                <span> {trip.date_visited.slice(-2)},</span>
+                                <span> {trip.date_visited.slice(0,4)}</span>
+                            </p>
+                        </div>
+                        <div>
+                            <p className="starRating">
+                                {/* displays filled stars */}
+                                {Array(trip.star_rating).fill(0).map((_,index) => (
+                                    <span key={index}>&#9733;</span>
+                                ))}
+                                {/* displays remainder as unfilled */}
+                                {Array(5 - trip.star_rating).fill(0).map((_,index) => (
+                                    <span key={index}>&#9734;</span>
+                                ))}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </>
     )
 }
