@@ -8,7 +8,7 @@ function ParkList(props) {
 			{ props.chosenPark != '' ? (
 				<>
 				<br></br>
-			<button onClick={props.removeChosenPark}>Back to List</button>	
+			<button onClick={props.removeChosenPark}>&#10094; Back to List</button>	
 			<ParkShow chosenPark={props.chosenPark}/>
 			</>
 			) : ( <>
@@ -18,7 +18,7 @@ function ParkList(props) {
 				.slice() // Create a shallow copy to avoid mutating the original array, from chatGPT
 				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName, from chatGPT
 				.map((park, index) => (
-					<li key={index} className='parkListItem'><button onClick={() => props.handleChange(park)} className='parkListButton'>{park.fullName}</button></li>
+					<li key={index} className='parkListItem' onClick={() => props.handleChange(park)}>{park.fullName}</li>
 				))}
 			</ul>
 			</>

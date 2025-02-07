@@ -62,7 +62,8 @@ function App() {
 		<>
             {/* navbar always displayed */}
 			<Navbar setPage={setPage} />
-            
+
+            <div id="content">
             {/* home page shown by default */}
 			{page === "home" ? <Home /> : ""}
 
@@ -81,6 +82,7 @@ function App() {
 
 			{/* EditProfile section */}
 			{page === "editprofile" ? <EditProfile handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
+            </div>
 		</>
         
 	);

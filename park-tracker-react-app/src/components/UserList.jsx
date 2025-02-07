@@ -25,6 +25,7 @@ function UserList({ setChosenUser, setPage }) {
 
 	return (
 		<>
+            <h1>User List</h1>
             <ul className="userShowList">
             {userList.map((user, index) => (
                 <li key={index} onClick={() => routeUserShow(user.id)}>

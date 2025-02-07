@@ -4,19 +4,31 @@ function ParkShow(props) {
 
 	return (
 		<>
+            {/* header and image */}
 			<h1>{props.chosenPark.fullName}</h1>
 			<h2>{props.chosenPark.addresses[0].line1}, {props.chosenPark.addresses[0].city}, {props.chosenPark.addresses[0].stateCode}, {props.chosenPark.addresses[0].postalCode}</h2>
 			<img src={props.chosenPark.images[0].url} id="parkImage"/>
-            <h2>{props.chosenPark.description}</h2>
-			<h3>{props.chosenPark.operatingHours[0].description}</h3>
+
+            {/* description */}
+            <h3>About</h3>
+            <p>{props.chosenPark.description}</p>
+            <br />
+
+            {/* additional info */}
+            <h3>Hours</h3>
+			<p>{props.chosenPark.operatingHours[0].description}</p>
+            <br />
+
+            <h3>Fees & Parking</h3>
 			{props.chosenPark.entranceFees.length === 0 ? (
 				<>
-				<h2>Free</h2>
+				<p>Free</p>
 				</>
 			) : (
 				<>
-				<h3>{props.chosenPark.entranceFees[0].title}: ${props.chosenPark.entranceFees[0].cost}</h3>
-				<h3>{props.chosenPark.entranceFees[0].description}</h3>
+				<p>{props.chosenPark.entranceFees[0].title}: ${props.chosenPark.entranceFees[0].cost}</p>
+                <br />
+				<p>{props.chosenPark.entranceFees[0].description}</p>
 				</>
 			)}
 			
