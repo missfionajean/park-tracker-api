@@ -25,9 +25,9 @@ const SignUpForm = (props) => {
 
   return (
     <>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <p>
+      <h1>Sign Up</h1>
+      <form onSubmit={handleSubmit} className="signForm">
+        
           <label htmlFor="username">Username: </label>
           <input
             type="text"
@@ -36,8 +36,8 @@ const SignUpForm = (props) => {
             value={formData.username}
             onChange={handleInputChange}
           />
-        </p>
-        <p>
+        
+        
           <label htmlFor="password">Password: </label>
           <input
             type="password"
@@ -46,8 +46,8 @@ const SignUpForm = (props) => {
             value={formData.password}
             onChange={handleInputChange}
           />
-        </p>
-        <p>
+        
+        
           <label htmlFor="location">Location: </label>
           <input
             type="location"
@@ -56,18 +56,17 @@ const SignUpForm = (props) => {
             value={formData.location}
             onChange={handleInputChange}
           />
-        </p>
-        <p>
+        
+        
           <label htmlFor="travel_preferences">Accommodation Preferences: </label>
-          <input
+          <textarea
             type="travel_preferences"
             id="travel_preferences"
             name="travel_preferences"
             value={formData.travel_preferences}
             onChange={handleInputChange}
           />
-        </p>
-
+        
         <div>
           <button>Sign Up</button>
         </div>

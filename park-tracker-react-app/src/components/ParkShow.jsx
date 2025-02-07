@@ -29,6 +29,7 @@ function ParkShow(props) {
 				<p>{props.chosenPark.entranceFees[0].title}: ${props.chosenPark.entranceFees[0].cost}</p>
                 <br />
 				<p>{props.chosenPark.entranceFees[0].description}</p>
+				<br/>
 				</>
 			)}
 			

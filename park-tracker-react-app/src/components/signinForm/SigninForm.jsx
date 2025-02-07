@@ -21,9 +21,9 @@ const SignInForm = () => {
 
   return (
     <>
-      <h2>Sign In</h2>
-      <form onSubmit={handleSubmit}>
-        <p>
+      <h1>Sign In</h1>
+      <form onSubmit={handleSubmit} className="signForm">
+        
           <label htmlFor="username">Username: </label>
           <input
             type="text"
@@ -32,8 +32,7 @@ const SignInForm = () => {
             value={formData.username}
             onChange={handleInputChange}
           />
-        </p>
-        <p>
+        
           <label htmlFor="password">Password: </label>
           <input
             type="password"
@@ -42,7 +41,6 @@ const SignInForm = () => {
             value={formData.password}
             onChange={handleInputChange}
           />
-        </p>
 
         <div>
           <button>Sign In</button>

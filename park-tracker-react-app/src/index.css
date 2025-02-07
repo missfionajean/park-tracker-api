@@ -6,8 +6,14 @@
 	font-weight: 400;
 
 	color-scheme: light dark;
-	color: mediumblue;
-	background-color: wheat;
+	color: rgb(248, 248, 251);
+	/* background-color: wheat; */
+	background-image: url('./assets/mountain-background.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	height: 100vh;
+	width: 100dvw;
+	background-size: cover;
 
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
@@ -27,15 +33,32 @@
 h1 {
     font-size: 3.2em;
     font-family: "Montserrat Alternates";
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
-#submitButton {
+/* #submitButton {
 	background-color: blue;
 }
 
 #cancelButton {
 	background-color: red;
+} */
+
+.signForm {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+.signForm input {
+	width: 225px;
+	margin-bottom: 5px;
+}
+
+.signForm textarea {
+	height: 70px;
+	width: 225px;
 }
 
 .newTripButtons {
@@ -66,8 +89,9 @@ h1 {
 
 .parkListItem:hover {
 	cursor: pointer;
-    color: white;
-    background-color: mediumblue;
+    color: skyblue;
+    /* background-color: rgba(0, 0, 0, .75); */
+	font-size: 1.5em;
 }
 
 .userShowList {
@@ -83,7 +107,7 @@ nav {
 	align-items: center;
 	justify-content: center;
 	width: 100dvw;
-    background-color: darkgreen;
+    background-color: transparent;
     color: white;
 }
 
@@ -100,7 +124,8 @@ nav {
 }
 
 .navButton:hover {
-    background-color: green;
+    background-color: rgba(0, 0, 0, .35);
+	cursor: pointer;
 }
 
 .removeEdit {
@@ -111,13 +136,18 @@ nav {
 	padding-left: -5%;
 }
 
-.edit {
-	background-color: rgb(106, 255, 0);
-	color: rgb(4, 0, 0);
+/* .edit {
+	background-color: transparent;
+	border: 2px solid rgba(0, 0, 0, .35);
 }
 
+.edit:hover {
+	background-color: rgb(106, 255, .5);
+	border: 2px solid rgba(0, 0, 0, 1);
+} */
+
 .remove {
-	background-color: rgb(251, 7, 251);
+	margin-right: 10px;
 }
 
 button {
