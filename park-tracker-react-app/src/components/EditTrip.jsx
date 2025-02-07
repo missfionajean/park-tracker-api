@@ -27,7 +27,7 @@ function EditTrip (props) {
 		});
 
 		// un-renders trip add form (resets every re-render)
-		props.toggleTripForm();
+		// props.toggleTripForm();
         props.handleShowEdit();
 	};
 

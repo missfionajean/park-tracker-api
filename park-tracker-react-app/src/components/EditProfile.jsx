@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import NewTrip from "./NewTrip";
 import EditTrip from "./EditTrip";
-import Cookies from 'js-cookie'
-import * as tripService from "../services/tripService";
+// import Cookies from 'js-cookie'
+// import * as tripService from "../services/tripService";
 import * as authService from '../services/authService'
 import { signout } from "../services/authService";
 
@@ -63,7 +63,7 @@ function EditProfile (props) {
 			}
 		};
 		getTrips();
-	}, [props.user])
+	}, [])
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 
@@ -124,7 +124,7 @@ function EditProfile (props) {
             <button onClick={signOut}>Sign Out</button>
             {showEdit === true ? (
                 <>
-                 <EditTrip tripToEdit={tripToEdit} tripList={tripList} toggleTripForm={toggleTripForm} foundList={props.foundList} handleShowEdit={handleShowEdit} showEdit={showEdit}/>
+                 <EditTrip tripToEdit={tripToEdit} tripList={tripList} toggleTripForm={toggleTripForm} foundList={props.foundList} handleShowEdit={handleShowEdit} showEdit={showEdit} setPage={props.setPage}/>
                 </>
             ) : ( <>
 
@@ -133,7 +133,7 @@ function EditProfile (props) {
             <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
             <h2>Trips</h2>
             
-            {addTrip ? <NewTrip setTripList={setTripList} chosenUser={currentUser.id} foundList={props.foundList} toggleTripForm={toggleTripForm}/> : <button onClick={toggleTripForm}>Add Trip</button>}
+            {addTrip ? <NewTrip setTripList={setTripList} chosenUser={currentUser.id} foundList={props.foundList} toggleTripForm={toggleTripForm} setPage={props.setPage}/> : <button onClick={toggleTripForm}>Add Trip</button>}
             {tripList
             .sort((a, b) => b.date_visited.localeCompare(a.date_visited))
             .map((trip) => (

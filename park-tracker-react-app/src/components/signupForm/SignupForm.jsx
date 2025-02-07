@@ -15,9 +15,9 @@ const SignUpForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newUserResponse = await authService.signup(formData);
-      props.setUser(newUserResponse)
-      console.log(props.user)
+        await authService.signup(formData);
+    //   props.setUser(newUserResponse)
+        console.log(props.user)
     } catch (error) {
       console.log(error.message);
     }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import * as tripService from "../services/tripService";
 import * as authService from "../services/authService";
 

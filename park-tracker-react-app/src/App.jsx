@@ -14,11 +14,6 @@ function App() {
 	// state variable to render current page
 	const [page, setPage] = useState("home");
 
-	// function passed to navbar to update page state
-	const changePage = (event) => {
-		setPage(event.target.value);
-	};
-
     // holds national park name for API search and display
     const [chosenPark, setChosenPark] = useState([])
 	//console.log(chosenPark)
@@ -66,7 +61,7 @@ function App() {
 	return (
 		<>
             {/* navbar always displayed */}
-			<Navbar changePage={changePage} />
+			<Navbar setPage={setPage} />
             
             {/* home page shown by default */}
 			{page === "home" ? <Home /> : ""}
