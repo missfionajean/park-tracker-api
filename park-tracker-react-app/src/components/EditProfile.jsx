@@ -6,6 +6,7 @@ import EditTrip from "./EditTrip";
 // import * as tripService from "../services/tripService";
 import * as authService from '../services/authService'
 import { signout } from "../services/authService";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 
 function EditProfile (props) {
 	// url path to show page is baseurl/api/user/userid
@@ -128,10 +129,20 @@ function EditProfile (props) {
                 </>
             ) : ( <>
 
-			<h1>{currentUser.username}</h1>
-			<h2>{currentUser.location}</h2>
-            <p className="accomidation">Accommodation Preferences: {currentUser.travel_preferences}</p>
-            <h2>Trips</h2>
+			{/* headline */}
+            <h1>{currentUser.username}</h1>
+            
+            {/* basic user info */}
+            <div className="userInfo">
+                <div className="userLocation">
+                    <FontAwesomeIcon icon={faMapMarkerAlt} size="2x" color="skyblue" />
+                    <h2>{currentUser.location}</h2>
+                </div>
+                <div>
+                    <h3>Accommodation Preferences:</h3>
+                    <p>{currentUser.travel_preferences}</p>
+                </div>
+            </div>
             
             {addTrip ? <NewTrip setTripList={setTripList} chosenUser={currentUser.id} foundList={props.foundList} toggleTripForm={toggleTripForm} setPage={props.setPage}/> : <button onClick={toggleTripForm}>Add Trip</button>}
             {tripList
