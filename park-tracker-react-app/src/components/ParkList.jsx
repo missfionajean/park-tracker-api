@@ -15,8 +15,8 @@ function ParkList(props) {
 				<h1>U.S. National Parks</h1>
 			<ul className="parkList">
 				{props.foundList
-				.slice() // Create a shallow copy to avoid mutating the original array, from chatGPT
-				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName, from chatGPT
+				.slice() // Create a shallow copy to avoid mutating the original array
+				.sort((a, b) => a.fullName.localeCompare(b.fullName)) // Sort alphabetically by fullName
 				.map((park, index) => (
 					<li key={index} className='parkListItem' onClick={() => props.handleChange(park)}>{park.fullName}</li>
 				))}

@@ -4,6 +4,8 @@ import { jwtDecode } from "jwt-decode";
 
 export const signup = async (formData) => {
   try {
+    console.log("Django API URL:", djangoApiUrl); 
+    console.log("Vite Env Variables:", import.meta.env);
     const res = await fetch(`${djangoApiUrl}/user`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -18,7 +20,7 @@ export const signup = async (formData) => {
 
 export const signin = async (user) => {
   try {
-    const res = await fetch(`http://localhost:8000/api/auth-token`, {
+    const res = await fetch(`${djangoApiUrl}/auth-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),

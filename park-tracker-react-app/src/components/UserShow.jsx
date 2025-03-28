@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useEffect } from "react";
+
+const djangoApiUrl = import.meta.env.VITE_DJANGO_API_URL;
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+
 
 function UserShow(props) {
 	// url path to show page is baseurl/api/user/userid
@@ -29,7 +33,7 @@ function UserShow(props) {
         // logic to grab user info based on link clicked
 		const getUserInfo = async () => {
 			try {
-				const res = await fetch(`http://localhost:8000/api/user/${props.chosenUser}`);
+				const res = await fetch(`${djangoApiUrl}/user/${props.chosenUser}`);
 				let JSONdata = await res.json();
                 console.log(JSONdata)
 				setCurrentUser(JSONdata);
@@ -43,7 +47,7 @@ function UserShow(props) {
         // logic to grab all trip info from sql database
         const getTrips = async () => {
 			try {
-				const res = await fetch("http://localhost:8000/api/trip");
+				const res = await fetch(`${djangoApiUrl}/trip`);
 				let JSONdata = await res.json();
                 let filteredList = JSONdata.filter((trip) => trip.user_id === props.chosenUser);
 				setTripList(filteredList);
@@ -55,6 +59,7 @@ function UserShow(props) {
 	}, [])
 
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    console.log(tripList)
 
     const handleChosenPark = async (parkName) => {
         const parkInfo = props.foundList.filter((park) => park.fullName === parkName)
