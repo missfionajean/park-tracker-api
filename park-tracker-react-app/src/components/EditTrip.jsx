@@ -33,7 +33,7 @@ function EditTrip (props) {
 
     const handleInput = (event) => {
 		console.log(event.target.name, event.target.value)
-		setTripData((tripData) => ({ //tripData callback function used here to guaruntee the latest state is used and then updated. something was happening for these to update out of order(?), and the park name was not being updated and sent in the request
+		setTripData((tripData) => ({ //tripData callback function used here to garuntee the latest state is used and then updated. something was happening for these to update out of order(?), and the park name was not being updated and sent in the request
 			...tripData,
 			[event.target.name]: event.target.value,
 		}))

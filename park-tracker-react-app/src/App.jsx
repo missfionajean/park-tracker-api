@@ -1,6 +1,6 @@
 import SignUpForm from "./components/signupForm/SignupForm";
 import SignInForm from "./components/signinForm/SigninForm";
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
 import UserList from "./components/UserList";
@@ -9,6 +9,8 @@ import NewUser from "./components/NewUser";
 import ParkShow from "./components/ParkShow";
 import ParkList from "./components/ParkList";
 import EditProfile from "./components/EditProfile";
+const npsApiKey = import.meta.env.VITE_NPS_API_KEY;
+const ParkListLazy = lazy(() => import('./components/ParkList'))
 
 function App() {
 	// state variable to render current page
@@ -35,18 +37,18 @@ function App() {
 	useEffect (() => {
 	const findParkList = async () => {
 		let response = await fetch ( //finds every park in the nps.gov parks database, max limit of 500 results, sorted by releavance score
-			'https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+			`https://developer.nps.gov/api/v1/parks?limit=500&q=national%20park&sort=-relevanceScore&api_key=${npsApiKey}`
 		)
 		let JSONdata = await response.json()
 		const parks = JSONdata.data
 		const nationalParks = parks.filter((park) => park.designation === "National Park")
 		// console.log(nationalParks)
 		let amSamoa = await fetch (
-			'https://developer.nps.gov/api/v1/parks?limit=1&q=american%20samoa%20national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+			`https://developer.nps.gov/api/v1/parks?limit=1&q=american%20samoa%20national%20park&sort=-relevanceScore&api_key=${npsApiKey}`
 		)
 		let amSamoaJSON = await amSamoa.json()
 		let denali = await fetch (
-			'https://developer.nps.gov/api/v1/parks?limit=1&q=denali%20national%20park&sort=-relevanceScore&api_key=2XWk6CI7j2crV9hX0XuNcqTjvJNX2m4jfpALutbx'
+			`https://developer.nps.gov/api/v1/parks?limit=1&q=denali%20national%20park&sort=-relevanceScore&api_key=${npsApiKey}`
 		)
 		let denaliJSON = await denali.json()
 		let allParks = [...nationalParks]
@@ -71,8 +73,9 @@ function App() {
 			{page === "userlist" ? <UserList setChosenUser={setChosenUser} setPage={setPage}/> : ""}
 			{page === "usershow" ? <UserShow handleChange={handleChange} setPage={setPage} foundList={foundList} setChosenPark={setChosenPark} chosenUser={chosenUser}/> : ""}
 
+			{/* <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> */}
             {/* legs of park section */}
-			{page === "parklist" ? <ParkList removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/> : ""}
+			{page === "parklist" ? <Suspense><ParkListLazy removeChosenPark={removeChosenPark} foundList={foundList} handleChange={handleChange} chosenPark={chosenPark}/></Suspense> : ""}
 			{page === "parkshow" ? <ParkShow chosenPark={chosenPark}/> : ""}
 
             {/* legs of authentication section */}
